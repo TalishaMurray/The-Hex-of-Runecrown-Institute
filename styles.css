@@ -1,0 +1,69 @@
+*{
+  background-color: rgb(43, 43, 43);
+  color:rgb(218, 218, 218);
+}
+body{
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 100vw;
+  height: 100vh;
+}
+.btn{
+  border: solid rgb(24, 24, 24) 1px;
+  border-radius: 5px;
+  background-color: rgb(29, 29, 29) ;
+}
+.btn:hover{
+  box-shadow: 5px 5px 10px black;
+  border: solid grey 1px;
+}
+.character-status{
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+#character{
+  background-color: grey;
+  height: 50%;
+  width: 95%
+}
+#stats{
+  background-color: grey;
+  height: 40%;
+  width: 95%
+}
+#inventory-btn{
+  width: 25%;
+}
+.hidden{
+  display: none;
+}
+.game-area{
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+#text{
+  width: 90%;
+  text-align: center;
+}
+.btn-grid{
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 10px;
+}
+
+.option-btns{
+text-align: left;
+}
+
+
+
