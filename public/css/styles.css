@@ -1,12 +1,9 @@
 *{
-  background-color: rgb(43, 43, 43);
   color:rgb(218, 218, 218);
 }
 body{
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
   width: 100vw;
   height: 100vh;
 }
@@ -16,7 +13,7 @@ body{
   background-color: rgb(29, 29, 29) ;
 }
 .btn:hover{
-  box-shadow: 5px 5px 10px black;
+  box-shadow: 5px 5px 15px black;
   border: solid grey 1px;
 }
 .character-status{
