@@ -1,0 +1,68 @@
+body{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background-color:rgb(113, 122, 110);
+}
+.character-status{
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(43, 43, 43);
+}
+
+#character{
+  border: solid 1px black;
+  height: 50%;
+  width: 95%
+}
+#stats{
+  border: solid 1px black;
+  height: 40%;
+  width: 95%
+}
+#inventory-btn{
+  width: 25%;
+}
+.game-area{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#text{
+  width: 90%;
+  height: 50%;
+  display: flex;
+  justify-content: center; /* Horizontal alignment */
+  align-items: center;
+  background-color: rgb(43, 43, 43);
+  border: solid 1px 1px 0 1px black;
+  border-radius: 10px 10px 0 0;
+}
+.btn-grid{
+  width: 90%;
+  height: 40%;
+  display: grid;
+  justify-content: center;
+  align-content: flex-start;
+  background-color: rgb(43, 43, 43);
+  border: solid 0 1px 1px 1px black;
+  border-radius: 0 0 10px 10px;
+}
+
+.option-btns{
+margin-top: 10px;
+text-align: left;
+height: 20px;
+width: 1130px;
+}
+
+.jscolor{
+  height: 40px;
+  border: solid rgb(24, 24, 24) 1px;
+  border-radius: 5px;
+  background-color: rgb(29, 29, 29) ;
+}

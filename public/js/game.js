@@ -50,6 +50,7 @@ function showTextNode(index) {
         label.innerText = `Pick your ${option.lookPart} color: `;
 
         const colorPicker = document.createElement('input');
+        colorPicker.classList.add('color-picker');
         colorPicker.className = 'jscolor';
         colorPicker.value = character.looks.find(look => look.id === option.lookPart).color || "#EFE9DA";
         colorPicker.setAttribute('data-jscolor', '{closable:true,closeText:"OK",zIndex:9999}');
@@ -179,7 +180,7 @@ function modifyImagePixelData(newColor) {
     r: 255,  // Target white (255, 255, 255)
     g: 255,
     b: 255,
-    tolerance: 125  // Tolerance to match near-white colors
+    tolerance: 150  // Tolerance to match near-white colors
   };
 
   // Loop through every pixel in the image

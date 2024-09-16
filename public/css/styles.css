@@ -16,51 +16,6 @@ body{
   box-shadow: 5px 5px 15px black;
   border: solid grey 1px;
 }
-.character-status{
-  height: 100vh;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
-}
-
-#character{
-  background-color: grey;
-  height: 50%;
-  width: 95%
-}
-#stats{
-  background-color: grey;
-  height: 40%;
-  width: 95%
-}
-#inventory-btn{
-  width: 25%;
-}
 .hidden{
   display: none;
 }
-.game-area{
-  height: 100vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-}
-#text{
-  width: 90%;
-  text-align: center;
-}
-.btn-grid{
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(1, auto);
-  gap: 10px;
-}
-
-.option-btns{
-text-align: left;
-}
-
-
-
