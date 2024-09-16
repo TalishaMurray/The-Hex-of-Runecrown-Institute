@@ -162,31 +162,31 @@ const textNodes = [
       {
         text: "Light skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "Tan" },
+        setLooks: { id: "skin", color: "light" },
         color: "#DAB78D"
       },
       {
         text: "Tan skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "Tan" },
+        setLooks: { id: "skin", color: "tan" },
         color: "#C48850"
       },
       {
         text: "Dark Tan skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "Dtan" },
         color: "#9c682f"
       },
       {
         text: "Dark skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "dark" },
         color: "#653519"
       },
       {
         text: "Deep skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "deep" },
         color: "#231103"
       },
       {
@@ -209,37 +209,37 @@ const textNodes = [
       {
         text: "Green skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "green" },
         color: "#4f964d"
       },
       {
         text: "Blue skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "blue" },
         color: "#3c6498"
       },
       {
         text: "Purple skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "purple" },
         color: "#744DA8"
       },
       {
         text: "Red skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "red" },
         color: "#8c2c2c"
       },
       {
         text: "Pink skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "pink" },
         color: "#d495c4"
       },
       {
         text: "Orange skin",
         nextText: -3,
-        setLooks: { id: "skin", color: "pale" },
+        setLooks: { id: "skin", color: "orange" },
         color: "#e29630"
       },
       {
