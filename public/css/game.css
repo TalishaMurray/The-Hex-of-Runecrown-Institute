@@ -1,12 +1,11 @@
 body{
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
   background-color:rgb(113, 122, 110);
 }
 .character-status{
   height: 100vh;
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   background-color: rgb(43, 43, 43);
@@ -14,16 +13,38 @@ body{
 
 #character{
   border: solid 1px black;
-  height: 50%;
-  width: 95%
+  height: 30%;
+  width: 60%;
+  background-color:rgb(113, 122, 110);
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
-#stats{
-  border: solid 1px black;
-  height: 40%;
-  width: 95%
+
+.dropdown-content{
+  padding: 10px;
+  border: solid rgb(24, 24, 24) 1px;
+  border-radius: 5px;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
-#inventory-btn{
-  width: 25%;
+.dropdown-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dropdown-content ul li {
+  padding: 5px 0;
+}
+.dropdown {
+  margin-bottom: 10px;
+  width: 90%;
+}
+.hidden {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden; /* Ensures content is hidden when max-height is 0 */
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 .game-area{
   height: 100vh;

@@ -3,18 +3,34 @@ const optionButtonsElement = document.getElementById('option-btns');
 const canvas = document.getElementById('characterCanvas');
 const ctx = canvas.getContext('2d');
 
+
 let gameHistory = [];
 let inventory = {};
 let character = {};
+let day = 1;
+let hours = 6;
+let minutes = 0;
+let timeOfDay = 'morning';
+let dollar = 10;
+let cents = 0;
+
+
 
 // Game choice functions
+
 function startGame() {
   inventory = {};
   character = {
     base: "masc", // Default to masc base
-    stats: [],
+    stats: [
+      {id: 'strength', level: 1},
+      {id: 'dexterity', level: 1},
+      {id: 'wisdom', level: 1},
+      {id: 'charisma', level: 1},
+      {id: 'stamina', level: 100}
+    ],
     looks: [
-      { id: "skin", color: "#EFE9DA" },  // Default hex color for skin
+      { id: "skin", color: "#FFFFFF" },  // Default hex color for skin
       { id: "hair", color: "#000000" },  // Default hex color for hair
       { id: "eyes", color: "#000000" }   // Default hex color for eyes
     ]
@@ -26,7 +42,8 @@ function startGame() {
     inventory: JSON.parse(JSON.stringify(inventory)),
     currentTextNodeId: 1  // Save the initial state
   });
-
+  displayMoney();
+  displayTime();
   drawCharacter(); // Initial draw
   showTextNode(1);  // Show first text node
 }
@@ -108,6 +125,12 @@ function selectOption(option) {
     drawCharacter();  // Re-draw the character with updated looks
     return;  // No state change, just redraw
   }
+  if (option.setHours || option.setMinute){
+    advanceTime(option.setHours, option.setMinute);
+  }
+  if(option.setStamina){
+    exhuastCharacter(option.setStamina);
+  }
 
   // Save the current state **only when moving to a new text node**
   gameHistory.push({
@@ -132,6 +155,73 @@ function goBack() {
     showTextNode(previousState.currentTextNodeId);
   }
 }
+function displayTime() {
+  const timeDisplay = document.getElementById('timeDisplay');
+  timeDisplay.innerText = `Day ${day}, ${timeOfDay} (${hours}:${minutes.toString().padStart(2, '0')})`;
+}
+function displayMoney(){
+  const moneyDisplay = document.getElementById('moneyDisplay');
+  moneyDisplay.innerText = `$${dollar}.${cents.toString().padStart(2, '0')}`
+}
+function addMoney(dollarsAdded, centsAdded){
+  dollars += dollarsAdded;
+  cents += centsAdded;
+  if(cents > 100){
+    dollar += 1;
+    cents = cents % 100;
+  }
+}
+function advanceTime(hoursPassed, minutesPassed) {
+  hours += hoursPassed;
+  minutes += minutesPassed;
+
+  // Update the time of day based on hours
+  if (hours >= 6 && hours < 12) {
+    timeOfDay = 'morning';
+  } else if (hours >= 12 && hours < 18) {
+    timeOfDay = 'afternoon';
+  } else if (hours >= 18 && hours < 24) {
+    timeOfDay = 'night';
+  } else {
+    // If 24 hours have passed, it's a new day
+    day++;
+    hours = hours % 24; // Reset hours after 24
+    timeOfDay = 'morning';
+  }
+  if (minutes > 60){
+    if (minutes % 60 > 0){
+      minutes = minutes % 60;
+    }else{
+      minutes = 0;
+    }
+  }
+
+  displayTime(); // Show updated time
+}
+
+function exhuastCharacter(drain){
+  character.stats[4].level -= drain;
+  //still implement an exhaustion message and force rest
+}
+
+
+// Toggle function for dropdown
+function toggleDropdown(id) {
+  const content = document.getElementById(id);
+  if (content.classList.contains('hidden')) {
+    // Measure the full height of the content when it's not hidden
+    content.style.maxHeight = content.scrollHeight + "px";
+  } else {
+    // Set max-height to 0 to trigger the closing transition
+    content.style.maxHeight = "0px";
+  }
+  content.classList.toggle('hidden');
+}
+
+
+
+
+
 
 // Canvas drawing functions
 
@@ -180,7 +270,7 @@ function modifyImagePixelData(newColor) {
     r: 255,  // Target white (255, 255, 255)
     g: 255,
     b: 255,
-    tolerance: 150  // Tolerance to match near-white colors
+    tolerance: 180  // Tolerance to match near-white colors
   };
 
   // Loop through every pixel in the image
@@ -249,7 +339,9 @@ function handleColorChange(part, color) {
   }
 }
 
+
 // Text nodes (game choices)
+
 const textNodes = [
   {
     id: -1,

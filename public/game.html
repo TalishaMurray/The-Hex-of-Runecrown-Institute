@@ -11,20 +11,29 @@
   </head>
   <body>
     <div class="character-status">
-      <div id="character"><canvas id="characterCanvas" width="600" height="459"></canvas></div>
-      <div id="stats">Will list the character stats</div>
-      <button id="inventory-btn" class="btn">Inventory</button>
-      <div class ="inventory hidden">
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
-        <div class="inventory-slot"></div>
+      <div id="character"><canvas id="characterCanvas" width="300" height="275"></canvas></div>
+      <div id="timeDisplay"></div>
+      <div id="moneyDisplay"></div>
+      <div class="dropdown">
+        <button class="dropdown-btn btn" id="stats-btn" onclick="toggleDropdown('stats-content')">Character Stats</button>
+        <div class="dropdown-content hidden" id="stats-content">
+          <ul>
+            <li>Strength: <span id="stat-strength">5</span></li>
+            <li>Agility: <span id="stat-agility">3</span></li>
+            <li>Wisdom: <span id="stat-wisdom">7</span></li>
+            <li>Stamina: <span id="stat-exhaustion">100</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-btn btn" id="inventory-btn" onclick="toggleDropdown('inventory-content')">Inventory</button>
+        <div class="dropdown-content hidden" id="inventory-content">
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="game-area">
