@@ -7,6 +7,7 @@ const ctx = canvas.getContext('2d');
 let gameHistory = [];
 let inventory = {};
 let character = {};
+let locations = {};
 let day = 1;
 let hours = 6;
 let minutes = 0;
