@@ -21,7 +21,7 @@ let cents = 0;
 function startGame() {
   inventory = {};
   character = {
-    base: "masc", // Default to masc base
+    base: "masc",
     stats: [
       {id: 'strength', level: 1},
       {id: 'dexterity', level: 1},
@@ -30,9 +30,9 @@ function startGame() {
       {id: 'stamina', level: 100}
     ],
     looks: [
-      { id: "skin", color: "#FFFFFF" },  // Default hex color for skin
-      { id: "hair", color: "#000000" },  // Default hex color for hair
-      { id: "eyes", color: "#000000" }   // Default hex color for eyes
+      { id: "skin", },  
+      { id: "hair", },  
+      { id: "eyes", }   
     ]
   };
 
@@ -44,7 +44,7 @@ function startGame() {
   });
   displayMoney();
   displayTime();
-  drawCharacter(); // Initial draw
+  drawCharacter();
   showTextNode(1);  // Show first text node
 }
 
@@ -61,38 +61,14 @@ function showTextNode(index) {
   // Loop through options and create buttons or color picker
   textNode.options.forEach(option => {
     if (showOption(option)) {
-      if (option.type === 'color-picker') {
-        // Create color picker for specific part (skin, hair, eyes, etc.)
-        const label = document.createElement('label');
-        label.innerText = `Pick your ${option.lookPart} color: `;
-
-        const colorPicker = document.createElement('input');
-        colorPicker.classList.add('color-picker');
-        colorPicker.className = 'jscolor';
-        colorPicker.value = character.looks.find(look => look.id === option.lookPart).color || "#EFE9DA";
-        colorPicker.setAttribute('data-jscolor', '{closable:true,closeText:"OK",zIndex:9999}');
-
-        // Update character's look part color on input change
-        colorPicker.addEventListener('change', (e) => {
-          const selectedColor = colorPicker.jscolor.toString(); // jscolor returns a hex string
-          const lookPart = option.lookPart; // "skin", "hair", or "eyes"
-          handleColorChange(lookPart, selectedColor); // Update the canvas
-        });
-
-        // Append color picker
-        optionButtonsElement.appendChild(label);
-        optionButtonsElement.appendChild(colorPicker);
-
-        // Initialize jscolor after appending
-        jscolor.install();
-      } else {
-        // Create regular button for other options
+      
+        // Create regular buttons
         const button = document.createElement('button');
         button.classList.add('btn', 'option-btns');
         button.innerText = option.text;
         button.addEventListener('click', () => selectOption(option));
         optionButtonsElement.appendChild(button);
-      }
+      
     }
   });
 }
@@ -224,7 +200,7 @@ function toggleDropdown(id) {
 
 
 // Canvas drawing functions
-
+// I have decided to go back to a different method for the time being
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -234,86 +210,22 @@ function loadImage(src) {
   });
 }
 
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+ function clearCanvas() {
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+ }
 
-async function drawCharacter() {
-  clearCanvas();
+ async function drawCharacter() {
+   clearCanvas();
 
-  try {
-    // Load the base image (fem or masc)
-    const baseImage = await loadImage(`./images/bases/${character.base}.png`);
-    ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+   try {
+     // Load the base image (fem or masc)
+     const baseImage = await loadImage(`./images/bases/${character.base}.png`);
+     ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
 
-    // Get the skin color
-    const skinColor = character.looks.find(look => look.id === 'skin').color;
-
-    // Modify the image pixel data for skin color
-    modifyImagePixelData(skinColor);
-
+   const skinColor = character.looks.find(look => look.id === 'skin').color;
   } catch (err) {
     console.error('Error loading images:', err);
   }
-}
-
-// Function to modify pixel data of the base image
-function modifyImagePixelData(newColor) {
-  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const data = imageData.data;
-
-  // Convert the new hex color to RGB
-  const rgbColor = hexToRgb(newColor);
-
-  // Define the threshold for white skin color
-  const skinColorThreshold = {
-    r: 255,  // Target white (255, 255, 255)
-    g: 255,
-    b: 255,
-    tolerance: 180  // Tolerance to match near-white colors
-  };
-
-  // Loop through every pixel in the image
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i];     // Red
-    const g = data[i + 1]; // Green
-    const b = data[i + 2]; // Blue
-
-    // Check if the pixel is close to white
-    if (
-      Math.abs(r - skinColorThreshold.r) < skinColorThreshold.tolerance &&
-      Math.abs(g - skinColorThreshold.g) < skinColorThreshold.tolerance &&
-      Math.abs(b - skinColorThreshold.b) < skinColorThreshold.tolerance
-    ) {
-      // Replace the pixel with the new skin color
-      data[i] = rgbColor.r;      // Red
-      data[i + 1] = rgbColor.g;  // Green
-      data[i + 2] = rgbColor.b;  // Blue
-    }
-  }
-  console.log('Converted RGB color:', rgbColor);
-
-  // Put the modified image data back onto the canvas
-  ctx.putImageData(imageData, 0, 0);
-}
-
-
-// Function to convert hex color to RGB
-function hexToRgb(hex) {
-  // Ensure the hex color starts with '#'
-  hex = hex.replace('#', '');
-
-  // Convert shorthand hex (e.g., #FFF) to full hex (e.g., #FFFFFF)
-  if (hex.length === 3) {
-    hex = hex.split('').map(h => h + h).join('');
-  }
-
-  const bigint = parseInt(hex, 16);
-  return {
-    r: (bigint >> 16) & 255,
-    g: (bigint >> 8) & 255,
-    b: bigint & 255
-  };
 }
 
 
@@ -322,22 +234,6 @@ function updateCharacterBase(baseType) {
   drawCharacter();
 }
 
-function handleColorChange(part, color) {
-  const lookIndex = character.looks.findIndex(look => look.id === part);
-  if (lookIndex > -1) {
-    // Add '#' prefix if it doesn't exist
-    if (!color.startsWith('#')) {
-      color = `#${color}`;
-    }
-
-    // Update the character's color in the looks array
-    character.looks[lookIndex].color = color;
-    console.log('Selected color:', color);
-
-    // Re-draw the character with the updated look
-    drawCharacter();
-  }
-}
 
 
 // Text nodes (game choices)
@@ -357,8 +253,7 @@ const textNodes = [
     id: -2,
     text: "You look into your mirror and see...",
     options: [
-      { text: "Pick your own skin color", type: "color-picker", lookPart: "skin" },
-      { text: "Confirm skin color", nextText: -3 },
+      // will fill this back in with skin color options
       { text: "Back", nextText: null, isGoBack: true }
     ]
   },
@@ -372,17 +267,34 @@ const textNodes = [
   },
   {
     id: 1,
-    text: "Our story starts on an average day.",
+    text: ` You're about to start your first day at a pristigious university. Although almost no information is known as to 
+    the public about this school it's nearly impossible to be accepted, people even theorize that there's some sort of secret
+    requirement for acceptance.`,
     options: [
-      { text: "Step into your first day of life.", nextText: 2 }
+      { text: "Next", nextText: 2 }
     ]
   },
   {
     id: 2,
-    text: "Wait a minute, do you know who you are?",
+    text: ` Anxiety shakes you as you wait outside the school perimiter with the groups of other acceptees. 
+    At least the school has enough forethought to provide a comfortable waiting area.
+    As you look around you spot a mirror, maybe freshening up a bit would help calm your nerves?`,
     options: [
-      { text: "Yes! I know exactly who I am!" },
-      { text: "No... I should take a look in the mirror.", nextText: -1 }
+      { text: "I don't have time to worry about looks right now.", nextText: 3}, // start game with defualt character eventually
+      { text: "It can't hurt to freshen up a bit", nextText: -1 }
+    ]
+  },
+  {
+    id: 3,
+    text: ` Just as you look away from the mirror, a very proper-looking woman walks through the front entrance of the school.
+Something about her presence draws the crowd's attention, and the previous nervous chatter comes to an abrupt halt.
+
+  "Apologies for the wait. We're now ready to commence the welcome ceremony. Parents of students should, at this point, 
+start making their way home. Students, you may follow me to begin your first day," the woman states with a flat affect, looking almost bored.
+
+  Murmurs ripple through the crowd—some parents saying goodbye, others complaining. Either way, you were here alone to begin with.`,
+    options: [
+      { text: "Time to start the first day of the rest of my life.",}
     ]
   }
 ];
