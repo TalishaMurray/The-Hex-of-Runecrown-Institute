@@ -36,6 +36,101 @@ function startGame() {
       { id: "eyes", }   
     ]
   };
+  locations ={
+    Quad: {
+      desc: "The main center of campus, you can get to nearly any location on campus from here.",
+      connectedloc: ["Dorms","Nurse","Classes","Library","Greenhouse","StationZero"],
+      events:[]
+    },
+    Dorms: {
+      desc: `The dorm building from the outside looks like a small wooden building that's 
+      barely being held together by a single rusty nail and hopes and dreams, the inside is somehow far larger and nicer.`,
+      connectedloc: ["Nurse","Quad","Room"],
+      events:[]
+    },
+    Room: {
+      MazeEnterance: {
+        desc: "",
+        connectedloc: [],
+        events:[]
+      },
+    },
+    Nurse: {
+      desc: " There's a row of twin XL beds that line either side of the room with curtain separators. The main doctor can usually be found sleeping or drinking tea in the back corner on a cushioned chair.",
+      connectedloc: [],
+      events:[]
+    },
+    Library: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    Classes: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    Greenhouse: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    Finnigans: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    StationZero: {desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    TheMaw: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    MullersLake: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    TheMines: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    MazeEnterance: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    Maze: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    MazeCenter: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    ThicketEnterance: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    Thicket: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+    ThicketClearing: {
+      desc: "",
+      connectedloc: [],
+      events:[]
+    },
+
+  }
 
   gameHistory = [];
   gameHistory.push({
@@ -287,12 +382,10 @@ const textNodes = [
   },
   {
     id: 3,
-    text: ` Just as you look away from the mirror, a very proper-looking woman walks through the front entrance of the school.
+    text: `   Just as you look away from the mirror, a very proper-looking woman walks through the front entrance of the school.
 Something about her presence draws the crowd's attention, and the previous nervous chatter comes to an abrupt halt.
-
-  "Apologies for the wait. We're now ready to commence the welcome ceremony. Parents of students should, at this point, 
+    "Apologies for the wait. We're now ready to commence the welcome ceremony. Parents of students should, at this point, 
 start making their way home. Students, you may follow me to begin your first day," the woman states with a flat affect, looking almost bored.
-
   Murmurs ripple through the crowd—some parents saying goodbye, others complaining. Either way, you were here alone to begin with.`,
     options: [
       { text: "Time to start the first day of the rest of my life.",}
